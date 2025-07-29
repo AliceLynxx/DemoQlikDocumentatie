@@ -1,0 +1,93 @@
+///$tab Main
+SET ThousandSep=',';
+SET DecimalSep='.';
+SET MoneyThousandSep=',';
+SET MoneyDecimalSep='.';
+SET MoneyFormat='$#,##0.00;-$#,##0.00';
+SET TimeFormat='h:mm:ss TT';
+SET DateFormat='M/D/YYYY';
+SET TimestampFormat='M/D/YYYY h:mm:ss[.fff] TT';
+SET FirstWeekDay=6;
+SET BrokenWeeks=1;
+SET ReferenceDay=0;
+SET FirstMonthOfYear=1;
+SET CollationLocale='en-US';
+SET CreateSearchIndexOnReload=1;
+SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
+SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
+SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
+SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y';
+
+
+
+
+///$tab Section
+Date:
+LOAD
+    Date_ID,
+    "Date",
+    "year",
+    "Month",
+    Quarter,
+    Date_ID1
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Date);
+
+Branch:
+LOAD
+    Branch_ID,
+    Branch_NM
+    //Country_Name
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Branch);
+
+Revenue:
+LOAD
+    Dealer_ID,
+    Model_ID,
+    Branch_ID,
+    Date_ID,
+    Units_Sold,
+    Revenue
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Revenue);
+
+Dealer:
+LOAD
+    Dealer_ID,
+    Dealer_NM,
+    Location_ID,
+    Location_NM,
+    Country_ID
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Dealer);
+
+Product:
+LOAD
+    Product_ID,
+    Product_Name,
+    Model_ID,
+    Model_Name,
+    "E",
+    F,
+    G
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Procduct);
+
+Country:
+LOAD
+    Country_ID,
+    Country_Name
+FROM [lib://Data - Prorail (vps-17006-1508_wnieuwenhuizen)/Dealer Sales.xlsx]
+(ooxml, embedded labels, table is Country);
+
+
+Country2:
+LOAD
+    Country_Name,
+    Country_Name2
+FROM [lib://AttachedFiles/new countrie names.xlsx]
+(ooxml, embedded labels, table is Sheet1);
+
+
